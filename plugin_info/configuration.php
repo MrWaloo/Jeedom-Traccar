@@ -25,19 +25,18 @@ if (!isConnect()) {
 ?>
 <form class="form-horizontal">
 	<fieldset>
-    <!-- BR: 2026/08/03: Add MQTT -->
-	<?php if (class_exists('jMQTT')) {
+		<!-- BR: 2026/08/03: Add MQTT -->
+		<?php
+		if (class_exists('jMQTT')) {
 			echo '<div class="alert alert-warning">{{Le plugin jMQTT est installé, veuillez vérifier la configuration du broker dans le plugin jMQTT et la reporter, si nécessaire, dans le plugin MQTT Manager.}}</div>';
 		}
-	?>
+		?>
 		<div class="form-group">
 			<label class="col-md-4 control-label">{{Mode}}</label>
 			<div class="col-md-3">
-				<select class="configKey form-control"
-						data-l1key="notif_mode"
-						id="sel_notificationMode">
+				<select class="configKey form-control" data-l1key="notif_mode" id="sel_notificationMode">
 					<option value="">{{A configurer}}</option>
-					<option value="legacy">{{Legacy}}</option>
+					<option value="url">{{url}}</option>
 					<option value="mqtt">{{MQTT}}</option>
 				</select>
 			</div>
@@ -52,11 +51,11 @@ if (!isConnect()) {
 		</div>
 	</fieldset>
 	<fieldset>
-		<div class="form-group notificationMode legacy">
+		<div class="form-group notificationMode url">
 			<div class="form-group">
 				<label class="col-lg-4 control-label">Configuration Traccar 'traccar.xml' avec serveur Traccar sur le même réseau que Jeedom</label>
 				<div class="col-lg-3">
-<?php
+					<?php
 					echo '<textarea class="eqLogicAttr form-control" wrap="off" rows="6" style="width: 750px">';
 					echo htmlentities('<!--- jeedom direct connector --->
 <entry key=\'forward.enable\'>true</entry>
@@ -88,14 +87,15 @@ if (!isConnect()) {
 	</fieldset>
 	<fieldset>
 		<div class="form-group notificationMode mqtt">
-			<?php if (!class_exists('mqtt2')) {
+			<?php
+			if (!class_exists('mqtt2')) {
 				echo '<div class="alert alert-warning">{{Le plugin MQTTManager n\'est pas installé, veuillez l\'installer avant de configurer le plugin traccar en MQTT.}}</div>';
 			}
 			?>
 			<div class="form-group">
 			<label class="col-lg-4 control-label">Configuration Traccar 'traccar.xml' avec serveur MQTT</label>
 			<div class="col-lg-3">
-<?php
+				<?php
 				if (class_exists('mqtt2')) {
 					$mqtt = mqtt2::getFormatedInfos();
 					$mqtt_url = $mqtt['protocol'] . '://';
@@ -131,10 +131,10 @@ if (!isConnect()) {
 
 <script>
 	<!-- BR: 2026/08/03: MQTT addon -->
-  $('#sel_notificationMode').off('change').on('change', function() {
-    $('.notificationMode').hide();
-    if ($(this).value() != '') {
-      $('.notificationMode.' + $(this).value()).show();
-    }
-  })
+	$('#sel_notificationMode').off('change').on('change', function() {
+		$('.notificationMode').hide();
+		if ($(this).value() != '') {
+			$('.notificationMode.' + $(this).value()).show();
+		}
+	})
 </script>

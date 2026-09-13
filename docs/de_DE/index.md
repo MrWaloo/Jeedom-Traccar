@@ -1,7 +1,7 @@
 ## Configuration du plugin
 
-Depuis la version 2.0, il faut choisir le mode de communication entre le serveur Traccar et Jeedom. Dans la page de configuration du plugin, choisissez le mode « legacy » si vous voulez utiliser la communication directe entre Traccar et Jeedom. C'est la communication qui était utilisée jusqu'à la version 2.0. Si vous choisissez d'utiliser MQTT, vous pouvez définir le préfixe racine utilisé (défaut : traccar) ; il vous faut surtout le plugin MQTTManager installé.
-En fonction du choix (« legacy » ou MQTT), la fenêtre de configuration de l'application Traccar contient les informations de configuration à copier-coller dans le fichier `traccar.xml`.
+Depuis la version 2.0, il faut choisir le mode de communication entre le serveur Traccar et Jeedom. Dans la page de configuration du plugin, choisissez le mode « url » si vous voulez utiliser la communication directe entre Traccar et Jeedom. C'est la communication qui était utilisée jusqu'à la version 2.0. Si vous choisissez d'utiliser MQTT, vous pouvez définir le préfixe racine utilisé (défaut : traccar) ; il vous faut surtout le plugin MQTTManager installé.
+En fonction du choix (« url » ou MQTT), la fenêtre de configuration de l'application Traccar contient les informations de configuration à copier-coller dans le fichier `traccar.xml`.
 
 Attention, un nouveau paramètre existe dans les dernières versions de Traccar pour recevoir les événements. Par défaut, l'envoi des événements est désactivé.
 
@@ -18,7 +18,7 @@ Les commandes Traccar permettant de définir si un équipement est présent ou n
 
 ## Configuration du serveur Traccar pour l'envoi des positions à Jeedom
 
-Du côté du serveur Traccar, éditez le fichier de configuration `traccar.xml` et ajoutez les lignes proposées dans le panneau de configuration du plugin. Il faut être en mode « legacy ».
+Du côté du serveur Traccar, éditez le fichier de configuration `traccar.xml` et ajoutez les lignes proposées dans le panneau de configuration du plugin. Il faut être en mode « url ».
 
 Exemple :
 
@@ -40,7 +40,7 @@ Relancez ensuite le serveur Traccar pour prendre en compte les changements :
 
 ## Configuration du serveur Traccar pour l'envoi des événements à Jeedom
 
-Assurez-vous d'avoir configuré le plugin en mode « legacy ».
+Assurez-vous d'avoir configuré le plugin en mode « url ».
 
 Éditez le fichier de configuration `traccar.xml` et ajoutez les lignes :
 

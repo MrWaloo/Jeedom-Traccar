@@ -22,21 +22,39 @@ class traccar extends eqLogic {
 	public static function event() {
 		// Réception d'une action événement
 		if (init('action') === 'event') {
-			// Récupération du flux JSON
-			$traccarEvent = json_decode(file_get_contents('php://input'));
-			
-			// Définition des variables
-			$traccarUniqueId = $traccarEvent['device']['uniqueId'];
-			$traccarEventType = $traccarEvent['event']['type'];
-			
-			// Récupération de l'équipement Traccar
-			$traccar = traccar::getTraccarByUniqueId($traccarUniqueId);
-			
-			log::add('traccar', 'info', 'Réception d\'un événement (legacy) ' . $traccarEventType . ' - tracker ' . $traccarUniqueId.' - ' . $traccar->getName());
-			log::add('traccar', 'debug', '  Trame JSON : ' . file_get_contents('php://input'));
-			
-			// Appel de la fonction d'événement Traccar
-			traccar::traccarEvent($traccar, $traccarEvent);
+			// 1. Récupération du flux JSON brut
+			$rawInput = file_get_contents('php://input');
+			log::add('traccar', 'debug', 'Trame JSON d\'événement reçue : ' . $rawInput);
+
+			// 2. Décodage en tableau associatif (true)
+			$traccarEvent = json_decode($rawInput, true);
+			log::add('traccar', 'debug', sprintf("traccarEvent = *'%s'*", var_export($traccarEvent, true)));
+
+			// 3. Contrôle de validité du JSON
+			if (!is_array($traccarEvent)) {
+				log::add('traccar', 'error', 'Événement Traccar : Trame JSON invalide ou vide');
+				return; // Empêche l'erreur 500 et répond HTTP 200 à Traccar
+			}
+
+			// 4. Extraction sécurisée de l'ID unique (Device)
+			$traccarUniqueId = $traccarEvent['device']['uniqueId'] ?? $traccarEvent['event']['deviceId'] ?? null;
+			$traccarEventType = $traccarEvent['event']['type'] ?? null;
+
+			if (null === $traccarUniqueId || null === $traccarEventType) {
+				log::add('traccar', 'warning', 'Événement Traccar : Structure JSON incomplète (uniqueId ou type manquant)');
+				return;
+			}
+
+			// 5. Récupération de l'équipement Traccar
+			try {
+				$traccar = traccar::getTraccarByUniqueId($traccarUniqueId);
+				log::add('traccar', 'info', 'Réception d\'un événement (legacy) ' . $traccarEventType . ' - tracker ' . $traccarUniqueId . ' - ' . $traccar->getName());
+				
+				// Appel de la fonction de traitement
+				traccar::traccarEvent($traccar, $traccarEvent);
+			} catch (Exception $e) {
+				log::add('traccar', 'error', 'Erreur traitement événement : ' . $e->getMessage());
+			}
 		}
 		// Réception d'une position
 		else {
@@ -46,7 +64,7 @@ class traccar extends eqLogic {
 			log::add('traccar', 'info', 'Réception d\'une position (legacy) - tracker ' . init('id') . ' - ' . $traccar->getName());
 			log::add('traccar', 'debug', '  > speed --> ' . init('speed'));
 			log::add('traccar', 'debug', '  > attributes --> ' . init('attributes'));
-	
+
 			// Appel de la fonction de position Traccar
 			traccar::traccarPosition($traccar, init('latitude'), init('longitude'), init('speed'), json_decode(init('attributes')));
 		}
@@ -241,7 +259,7 @@ class traccar extends eqLogic {
 		if (method_exists('mqtt2', 'removePluginTopicByPlugin')) {
 			mqtt2::removePluginTopicByPlugin(__CLASS__);
 		}
-		if ('mqtt' === config::byKey('notif_mode', 'traccar', 'legacy')) {
+		if ('mqtt' === config::byKey('notif_mode', 'traccar', 'url')) {
 			log::add('traccar', 'debug', 'Inscription au plugin mqtt2');
 			$root_topic = config::byKey('mqtt_topic', 'traccar', __CLASS__);
 			$root_topic = trim($root_topic, '/');
@@ -254,7 +272,7 @@ class traccar extends eqLogic {
 	 */
 	public static function handleMqttMessage($_datas) {
 
-		if ('mqtt' !== config::byKey('notif_mode', 'traccar', 'legacy')) {
+		if ('mqtt' !== config::byKey('notif_mode', 'traccar', 'url')) {
 			log::add('traccar', 'error', 'Réception d\'une notification http en mode MQTT. Vous devez configurer le plugin en mode "MQTT"'); 
 			return;
 		}
