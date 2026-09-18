@@ -14,6 +14,7 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
 $("#table_cmd").sortable({
   axis: "y",
   cursor: "move",
@@ -22,7 +23,7 @@ $("#table_cmd").sortable({
   tolerance: "intersect",
   forcePlaceholderSize: true
 })
-
+*/
 
 function addCmdToTable(_cmd) {
 	if (!isset(_cmd)) {

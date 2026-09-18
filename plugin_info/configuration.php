@@ -35,7 +35,7 @@ if (!isConnect()) {
 			<label class="col-md-4 control-label">{{Mode}}</label>
 			<div class="col-md-3">
 				<select class="configKey form-control" data-l1key="notif_mode" id="sel_notificationMode">
-					<option value="">{{A configurer}}</option>
+					<option value="" disabled selected hidden>{{A configurer}}</option>
 					<option value="url">{{url}}</option>
 					<option value="mqtt">{{MQTT}}</option>
 				</select>

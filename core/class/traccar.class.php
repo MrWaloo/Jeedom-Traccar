@@ -48,7 +48,7 @@ class traccar extends eqLogic {
 			// 5. Récupération de l'équipement Traccar
 			try {
 				$traccar = traccar::getTraccarByUniqueId($traccarUniqueId);
-				log::add('traccar', 'info', 'Réception d\'un événement (legacy) ' . $traccarEventType . ' - tracker ' . $traccarUniqueId . ' - ' . $traccar->getName());
+				log::add('traccar', 'info', 'Réception d\'un événement (url) ' . $traccarEventType . ' - tracker ' . $traccarUniqueId . ' - ' . $traccar->getName());
 				
 				// Appel de la fonction de traitement
 				traccar::traccarEvent($traccar, $traccarEvent);
@@ -61,7 +61,7 @@ class traccar extends eqLogic {
 			// Récupération de l'équipement Traccar
 			$traccar = traccar::getTraccarByUniqueId(init('id'));
 			
-			log::add('traccar', 'info', 'Réception d\'une position (legacy) - tracker ' . init('id') . ' - ' . $traccar->getName());
+			log::add('traccar', 'info', 'Réception d\'une position (url) - tracker ' . init('id') . ' - ' . $traccar->getName());
 			log::add('traccar', 'debug', '  > speed --> ' . init('speed'));
 			log::add('traccar', 'debug', '  > attributes --> ' . init('attributes'));
 
