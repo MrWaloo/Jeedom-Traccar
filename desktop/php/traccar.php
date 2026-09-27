@@ -166,8 +166,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<th style="min-width:200px;width:350px;">{{Nom}}</th>
 								<th style="width:100px;">{{Type}}</th>
 								<th>{{Etat}}</th>
-								<th style="min-width:260px;">{{Options}}</th>
-								<th style="min-width:80px;width:200px;">{{Actions}}</th>
+								<th style="min-width:300px;width:310px;">{{Options}}</th>
+								<th style="min-width:80px;width:120px;">{{Actions}}</th>
 							</tr>
 						</thead>
 						<tbody>
