@@ -321,7 +321,6 @@ class traccar extends eqLogic {
 	
 						// Récupère l'objet traccar du plugin
 						$traccar = traccar::getTraccarByUniqueId($traccarUniqueId);
-	
 						log::add('traccar', 'info', 'Réception d\'un événement MQTT ' . $traccarEventType . ' - tracker ' . $traccarUniqueId . ' - ' . $traccar->getName());
 						log::add('traccar', 'debug', '  Trame JSON : ' . $logMsgData);					   
 	
@@ -373,4 +372,3 @@ class traccar extends eqLogic {
 
 class traccarCmd extends cmd {
 }
-?>

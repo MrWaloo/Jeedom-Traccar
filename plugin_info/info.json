@@ -1,7 +1,7 @@
 {
 	"id" : "traccar",
 	"name" : "Traccar",
-	"description" : "Ce plugin permet d'interfacer un serveur Traccar avec le plugin Geoloc de Jeedom",
+	"description" : "Ce plugin permet recevoir les informations des traceurs GPS d'un serveur Traccar",
 	"licence" : "AGPL",
 	"author" : "Damien alias Dough <dough29@gmail.com>",
 	"require" : "4.4",
