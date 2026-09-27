@@ -112,7 +112,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">{{Mode de fonctionnement}}</label>
-							<div class="col-sm-2">
+							<div class="col-sm-9">
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="bound" />
 									{{Couplé au plugin Geoloc ou Localisation et Trajet (geotrav)}}
 								</label>
