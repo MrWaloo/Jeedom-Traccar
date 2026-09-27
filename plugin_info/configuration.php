@@ -53,7 +53,7 @@ if (!isConnect()) {
 	<fieldset>
 		<div class="form-group notificationMode url">
 			<div class="form-group">
-				<label class="col-lg-4 control-label">Configuration Traccar 'traccar.xml' avec serveur Traccar sur le même réseau que Jeedom</label>
+				<label class="col-lg-4 control-label">{{Configuration Traccar 'traccar.xml' avec serveur Traccar sur le même réseau que Jeedom}}</label>
 				<div class="col-lg-3">
 					<?php
 					echo '<textarea class="eqLogicAttr form-control" wrap="off" rows="6" style="width: 750px">';
@@ -69,7 +69,7 @@ if (!isConnect()) {
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-4 control-label">Configuration Traccar 'traccar.xml' avec serveur Traccar externe</label>
+				<label class="col-lg-4 control-label">{{Configuration Traccar 'traccar.xml' avec serveur Traccar externe}}</label>
 				<div class="col-lg-3">
 <?php
 					echo '<textarea class="eqLogicAttr form-control" wrap="off" rows="6" style="width: 750px">';
@@ -93,7 +93,7 @@ if (!isConnect()) {
 			}
 			?>
 			<div class="form-group">
-			<label class="col-lg-4 control-label">Configuration Traccar 'traccar.xml' avec serveur MQTT</label>
+			<label class="col-lg-4 control-label">{{Configuration Traccar 'traccar.xml' avec serveur MQTT}}</label>
 			<div class="col-lg-3">
 				<?php
 				if (class_exists('mqtt2')) {
