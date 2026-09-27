@@ -66,14 +66,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<form class="form-horizontal">
 					<fieldset>
 						<div class="form-group">
-							<label class="col-sm-2 control-label">{{Nom de l'équipement Traccar}}</label>
+							<label class="col-sm-3 control-label">{{Nom de l'équipement Traccar}}</label>
 							<div class="col-sm-3">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
 								<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement Traccar}}"/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label" >{{Objet parent}}</label>
+							<label class="col-sm-3 control-label" >{{Objet parent}}</label>
 							<div class="col-sm-3">
 								<select id="sel_object" class="form-control eqLogicAttr" data-l1key="object_id">
 									<option value="">{{Aucun}}</option>
@@ -86,8 +86,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label">{{Catégorie}}</label>
-							<div class="col-sm-9">
+							<label class="col-sm-3 control-label">{{Catégorie}}</label>
+							<div class="col-sm-8">
 								<?php
 								foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 									echo '<label class="checkbox-inline">';
@@ -98,28 +98,28 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label"></label>
-							<div class="col-sm-9">
+							<label class="col-sm-3 control-label"></label>
+							<div class="col-sm-3">
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label">{{Identifiant du tracker}}</label>
-							<div class="col-sm-2">
+							<label class="col-sm-3 control-label">{{Identifiant du tracker}}</label>
+							<div class="col-sm-8">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="logicalId" placeholder="{{Identifiant du tracker}}"/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label">{{Mode de fonctionnement}}</label>
-							<div class="col-sm-9">
+							<label class="col-sm-3 control-label">{{Mode de fonctionnement}}</label>
+							<div class="col-sm-8">
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="bound" />
 									{{Couplé au plugin Geoloc ou Localisation et Trajet (geotrav)}}
 								</label>
 							</div>
 						</div>
 						<div class="form-group config-bound" stype="display:none">
-							<label class="col-sm-2 control-label">{{Objet de localisation associé}}</label>
+							<label class="col-sm-3 control-label">{{Objet de localisation associé}}</label>
 							<div class="col-sm-3">
 								<select class="form-control eqLogicAttr configuration" id="geoloc" data-l1key="configuration" data-l2key="geoloc">
 									<option value="">{{Aucun}}</option>
@@ -164,9 +164,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<tr>
 								<th class="hidden-xs" style="min-width:50px;width:70px;">ID</th>
 								<th style="min-width:200px;width:350px;">{{Nom}}</th>
-								<th>{{Type}}</th>
-								<th style="min-width:260px;">{{Options}}</th>
+								<th style="width:100px;">{{Type}}</th>
 								<th>{{Etat}}</th>
+								<th style="min-width:260px;">{{Options}}</th>
 								<th style="min-width:80px;width:200px;">{{Actions}}</th>
 							</tr>
 						</thead>
